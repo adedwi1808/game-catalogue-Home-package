@@ -14,7 +14,7 @@ let package = Package(
         .package(url: "https://github.com/adedwi1808/game-catalogue-Common-package.git", from: "1.0.0"),
         .package(url: "https://github.com/adedwi1808/game-catalogue-Components-package.git", from: "1.0.0"),
         
-        .package(url: "https://github.com/Juanpe/SkeletonView.git", from: "1.7.0")
+        .package(url: "https://github.com/Juanpe/SkeletonView.git", from: "1.31.0")
     ],
     targets: [
         .target(
