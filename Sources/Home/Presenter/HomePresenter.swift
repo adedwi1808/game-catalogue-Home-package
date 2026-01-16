@@ -20,7 +20,7 @@ public protocol HomeViewProtocol: AnyObject {
 @MainActor
 public final class HomePresenter {
 
-    weak var view: HomeViewProtocol?
+    public weak var view: HomeViewProtocol?
     private var router: HomeRouterProtocol?
 
     private let homeUseCase: HomeUseCase
@@ -28,7 +28,7 @@ public final class HomePresenter {
     private let querySubject = CurrentValueSubject<String, Never>("")
     private var cancellables = Set<AnyCancellable>()
 
-    private(set) var games: [Game] = []
+    public private(set) var games: [Game] = []
 
     private var page = 1
     private let pageSize = 10
@@ -40,7 +40,7 @@ public final class HomePresenter {
         bind()
     }
 
-    func attachView(_ view: HomeViewProtocol) {
+    public func attachView(_ view: HomeViewProtocol) {
         self.view = view
         bind()
     }
@@ -92,19 +92,19 @@ public final class HomePresenter {
         hasMoreData = true
     }
 
-    func loadInitial() {
+    public func loadInitial() {
         querySubject.send("")
     }
 
-    func refresh() {
+    public func refresh() {
         querySubject.send(querySubject.value)
     }
 
-    func searchQueryChanged(_ query: String) {
+    public func searchQueryChanged(_ query: String) {
         querySubject.send(query)
     }
 
-    func loadNextPage() {
+    public func loadNextPage() {
         guard !isLoading, hasMoreData else { return }
 
         isLoading = true
@@ -132,7 +132,7 @@ public final class HomePresenter {
         .store(in: &cancellables)
     }
 
-    func navigateToDetail(index: Int) {
+    public func navigateToDetail(index: Int) {
         guard index < games.count, let viewController = view as? UIViewController else { return }
         router?.makeDetailPage(for: games[index], from: viewController)
     }
